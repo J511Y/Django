@@ -1,0 +1,8 @@
+body {
+    padding-top: 120px;
+    min-height: 100%;
+}
+footer {
+    margin: 5em 0;
+    position: absolute;
+}
