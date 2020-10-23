@@ -1,5 +1,17 @@
 {
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
-    "python.pythonPath": "d:\\유준혁_프로그래밍\\Django\\Django\\venv\\Scripts\\python.exe"
+    "python.linting.pylintPath": "d:\\유준혁_프로그래밍\\Django\\Django\\venv\\Scripts\\pylint",
+    "python.pythonPath": "d:\\유준혁_프로그래밍\\Django\\Django\\venv\\Scripts\\python.exe",
+    "python.formatting.provider": "autopep8",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "100"
+    ],
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_django"
+    ],
+    "editor.formatOnSave": true,
+    "editor.quickSuggestions": false
 }

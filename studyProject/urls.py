@@ -14,13 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from pashion import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+app_name = "main"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.main, name = 'main'),
-    path('profile/<int:id>', views.profile, name='profile'),
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    path('', views.main, name='main'),
+    path('user/', include('user.urls', namespace="user")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
