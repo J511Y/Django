@@ -39,7 +39,10 @@ class Login(View):
     def post(self, request):
         data = request.POST
         self.form = UserLoginForm(data)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 45c7cf8d786891f8e7498cccdbb50d83018a6f63
         if User.objects.filter(id=data['id'], password=data['password']).exists():
             request.session['login_id'] = data['id']
             return render(request, 'main.html')
@@ -52,7 +55,11 @@ class Login(View):
             return render(request, 'main.html')
         return render(request, 'user/login.html', {'form': self.form})
 
+<<<<<<< HEAD
 
+=======
+# login required
+>>>>>>> 45c7cf8d786891f8e7498cccdbb50d83018a6f63
 class Logout(View):
     def post(self, request):
         request.session['login_id'] = None
