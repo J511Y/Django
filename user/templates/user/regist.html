@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-3">
+    <form method="post" class="post-form" action="{% url 'user:regist' %}">
+		{% csrf_token %}
+		
+        <div class="form-group">
+            <label for="username">
+				사용자ID
+				{% if id %}
+				<text class="text-danger">(사용 중인 아이디 입니다)</text>
+				{% endif %}
+			</label>
+
+			<input type="text" class="form-control {{ id|default:'is-invalid' }}" name="id" id="id"
+				   value="{{ form.id.value|default:'' }}">
+		</div>
+
+        <div class="form-group">
+            <label for="password">
+				비밀번호
+				{% if password %}
+				<text class="text-danger">(비밀번호가 서로 일치하지 않습니다.)</text>
+				{% endif %}
+			</label>
+
+			<input type="password" class="form-control {{ password|default:'is-invalid' }}" name="password" id="password"
+                   value="{{ form.password.value|default:'' }}">
+		</div>
+		
+		<div class="form-group">
+            <label for="password_chk">비밀번호 확인</label>
+			
+			<input type="password" class="form-control {{ password|default:'is-invalid' }}" name="password_chk" id="password_chk"
+                   value="{{ form.password_chk.value|default:'' }}">
+		</div>
+
+		<div class="form-group">
+            <label for="name">
+				이름
+				{% if form.name.value == '' %}
+				<text class="text-danger">(이름을 입력해주세요.)</text>
+				{% endif %}
+			</label>
+            <input type="text" class="form-control {{ form.name.value|default:'is-invalid' }}" name="name" id="name"
+                   value="{{ form.name.value|default:'' }}">
+		</div>
+
+		<div class="form-group">
+            <label for="phone">
+				전화번호
+				{% if form.phone.value == '' %}
+				<text class="text-danger">(전화번호를 입력해주세요.)</text>
+				{% endif %}
+			</label>
+            <input type="text" class="form-control {{ form.phone.value|default:'is-invalid' }}" name="phone" id="phone"
+                   value="{{ form.phone.value|default:'' }}">
+		</div>
+
+		<div class="form-group">
+            <label for="nickname">
+				닉네임
+				{% if form.nickname.value == '' %}
+				<text class="text-danger">(닉네임을 입력해주세요.)</text>
+				{% endif %}
+			</label>
+            <input type="text" class="form-control {{ form.nickname.value|default:'is-invalid' }}" name="nickname" id="nickname"
+                   value="{{ form.nickname.value|default:'' }}">
+		</div>
+		<br>
+        <button type="submit" class="btn btn-outline-info btn-block float-left rounded">회원가입</button>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-3">
+    <form method="post" class="post-form" action="{% url 'user:login' %}">
+		{% csrf_token %}
+
+		{% if regist %}
+		<div class="alert alert-primary">
+			회원가입이 완료되었습니다.
+		</div>
+		{% endif %}
+
+        <div class="form-group">
+            <label for="username">사용자ID</label>
+            <input type="text" class="form-control" name="id" id="id"
+                   value="{{ form.id.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" class="form-control" name="password" id="password"
+                   value="{{ form.password.value|default_if_none:'' }}">
+		</div>
+		
+		{% if form.errors %}
+		<p class="text-danger">아이디 또는 비밀번호를 확인해주세요.</p>
+		{% endif %}
+		<br>
+        <button type="submit" class="btn btn-outline-info btn-block float-left rounded">로그인</button>
+    </form>
+</div>
+{% endblock content %}
