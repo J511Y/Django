@@ -35,7 +35,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             </div>
-
+            
             <!-- 로그인 된 경우 마이페이지/로그아웃 표시 -->
             {% if request.session.login_id %}
             <div class="float-right">
@@ -47,21 +47,6 @@
                     <input type="button" class="btn btn-sm btn-primary" value="로그아웃">
                 </a>
             </div>
-<<<<<<< HEAD
-
-            <!-- 로그인 된 경우 마이페이지/로그아웃 표시 -->
-            {% if request.session.login_id %}
-            <div class="float-right">
-                <a href="#" style="margin-right: 5px;">
-                    {{ request.session.login_id }} 님
-                </a>
-                
-                <a href="{% url 'user:logout' %}" style="margin-right: 5px;">
-                    <input type="button" class="btn btn-sm btn-primary" value="로그아웃">
-                </a>
-            </div>
-=======
->>>>>>> 45c7cf8d786891f8e7498cccdbb50d83018a6f63
             {% else %}
             <div>
                 <a href="{% url 'user:login' %}" style="margin-right: 5px;">
