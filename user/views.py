@@ -47,7 +47,7 @@ class Login(View):
             return render(request, 'user/login.html', {'form': self.form})
 
     def get(self, request):
-        login_id = request.session['login_id']
+        login_id = request.session.get('login_id', None)
         if login_id is not None and User.objects.filter(id=login_id).exists():
             return render(request, 'main.html')
         return render(request, 'user/login.html', {'form': self.form})
