@@ -13,16 +13,18 @@ from django.contrib.auth import authenticate
 class Regist(View):
     def post(self, request):
         data = request.POST
+        form = UserRegistForm(data)
 
         if User.objects.filter(id=data['id']).exists():
-            return JsonResponse({'message': '이미 존재하는 아이디 입니다.'}, status=400)
+            return render(request, 'user/regist.html', {'form': form, 'id': 'is-invalid'})
 
-        form = UserRegistForm(data)
+        if data['password'] != data['password_chk']:
+            return render(request, 'user/regist.html', {'form': form, 'password': 'is-invalid'})
 
         if form.is_valid():
             form.save()
             form = UserLoginForm()
-            return render(request, 'user/login.html', {'form': form})
+            return render(request, 'user/login.html', {'form': form, 'regist': True})
         else:
             return render(request, 'user/regist.html', {'form': form})
 
