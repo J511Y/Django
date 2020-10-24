@@ -1,7 +1,7 @@
 from django.db import models
+from django.conf import settings
 
 # 회원 모델
-
 
 class User(models.Model):
     # ID
@@ -50,3 +50,10 @@ class User(models.Model):
 
     def __str__(self):
         return self.name + '(' + self.nickname + ')'
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
+    #User모델과 Profile 1:1 연결
+    description = models.TextField(blank=True)
+    nickname = models.CharField(max_length=40, blank=True)
+    profile_image = models.ImageField(blank=True)
