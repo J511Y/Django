@@ -54,6 +54,7 @@ class Login(View):
         return render(request, 'user/login.html', {'form': self.form})
 
 
+# login required
 class Logout(View):
     def get(self, request):
         request.session.pop('login_id')
