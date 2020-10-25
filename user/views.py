@@ -3,6 +3,7 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import *
 from .models import User
+from .models import Profile
 from .forms import *
 from datetime import datetime
 from django.contrib.auth import authenticate
@@ -42,7 +43,7 @@ class Login(View):
 
         if User.objects.filter(id=data['id'], password=data['password']).exists():
             request.session['login_id'] = data['id']
-            return render(request, 'main.html')
+            return redirect("/")
         else:
             return render(request, 'user/login.html', {'form': self.form})
 
@@ -55,10 +56,6 @@ class Login(View):
 
 # login required
 class Logout(View):
-    def post(self, request):
-        request.session['login_id'] = None
-        return render(request, 'main.html')
-
     def get(self, request):
-        request.session['login_id'] = None
-        return render(request, 'main.html')
+        request.session.pop('login_id')
+        return redirect("/")
