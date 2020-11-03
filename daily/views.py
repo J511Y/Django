@@ -6,25 +6,19 @@ from .models import User
 from .forms import *
 from datetime import datetime
 from django.contrib.auth import authenticate
+from studyProject import util
+from studyProject import common
 
 # Create your views here.
 
 
 class DailyDetail(View):
+    @util.LoginAuth
     def post(self, request):
-        data = request.POST
-        form = DailyForm(data)
-
-        if User.objects.filter(id=data['id']).exists():
-            return render(request, 'daily/regist.html', {'form': form, 'id': 'is-invalid'})
-
-        if data['password'] != data['password_chk']:
-            return render(request, 'daily/regist.html', {'form': form, 'password': 'is-invalid'})
-
+        form = DailyForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            form = DailyForm()
-            return render(request, 'daily/login.html', {'form': form, 'regist': True})
+            return redirect('/')
         else:
             return render(request, 'daily/regist.html', {'form': form})
 

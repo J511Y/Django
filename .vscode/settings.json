@@ -1,8 +1,8 @@
 {
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
-    "python.linting.pylintPath": "C:\\django_project\\Django\\venv\\Scripts\\pylint",
-    "python.pythonPath": "C:\\django_project\\Django\\Python\\python.exe",
+    "python.linting.pylintPath": "c:\\django_project\\Django\\venv\\Scripts\\pylint",
+    "python.pythonPath": "c:\\django_project\\Django\\venv\\Scripts\\python.exe",
     "python.formatting.provider": "autopep8",
     "python.formatting.blackArgs": [
         "--line-length",

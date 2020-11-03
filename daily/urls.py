@@ -7,4 +7,5 @@ app_name = "daily"
 urlpatterns = [
     #path('', views.index, name='index'),
     path('<int:daily_id>/', DailyDetail.as_view(), name="detail"),
+    path('upload/', DailyDetail.as_view(), name="upload"),
 ]

@@ -7,6 +7,8 @@ from .models import Profile
 from .forms import *
 from datetime import datetime
 from django.contrib.auth import authenticate
+from studyProject import util
+from studyProject import common
 
 # Create your views here.
 
@@ -56,6 +58,7 @@ class Login(View):
 
 # login required
 class Logout(View):
+    @util.LoginAuth
     def get(self, request):
         request.session.pop('login_id')
         return redirect("/")
