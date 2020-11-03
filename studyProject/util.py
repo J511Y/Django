@@ -9,6 +9,10 @@ from django.shortcuts import *
 # 데코레이터들이 주로 모아질듯?
 
 
+
+
+
+############ 데코레이터 ########
 # 로그인 여부 확인
 def LoginAuth(func):
 
