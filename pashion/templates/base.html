@@ -44,6 +44,9 @@
         <!-- 로그인 된 경우 마이페이지/로그아웃 표시 -->
         {% if request.session.login_id %}
         <div class="float-right">
+            <a href="{% url 'daily:upload' %}" style="margin-right: 5px;">
+                <input type="button" class="btn btn-sm btn-primary" value="업로드">
+            </a>
             <a href="#" style="margin-right: 5px;">
                 {{ request.session.login_id }} 님
             </a>
@@ -71,7 +74,7 @@
         {% endblock content %}
 
     </div>
-    
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

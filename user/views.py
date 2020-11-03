@@ -3,7 +3,6 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import *
 from .models import User
-from .models import Profile
 from .forms import *
 from datetime import datetime
 from django.contrib.auth import authenticate

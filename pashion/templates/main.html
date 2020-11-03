@@ -1,36 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="bs-docs-section clearfix">
-    <div class="row mb-3 p-3 bg-light col-lg-4">
-        <form class="post-form" action="{% url 'daily:upload' %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="hidden" name="user_id" value="{{ request.session.login_id }}">
-            <div class="form-group">
-                <label for="id_content">게시글내용</label>
-                <input type="text" class="form-control" name="content" id="id_content">
-            </div>
 
-            <div class="form-group">
-                <label for="daily_image">이미지</label>
-                <input type="file" name="daily_image" accept="image/*" id="id_daily_image">
-            </div>
-
-            <div class="form-group">
-                <label for="id_style_tag">스타일태그</label>
-                <input type="text" class="form-control" name="style_tag" id="id_style_tag">
-            </div>
-            
-            <button type="submit" class="btn btn-outline-info btn-block float-left rounded">게시글 작성</button>
-        </form>
-    </div>
-</div>
 
 <div class="page-header" id="banner">
     <div class="row">
         {% for daily in Daily %}
         <div class="card bg-light mb-3 col-lg-4 p-0" style="min-height: 18rem;">
-            <div class="card-header">{{ daily.id }}</div>
-            <div class="card-body" style="background-image: url('media/{{ daily.daily_image }}'); background-size:cover;">
+            <div class="card-body"
+                style="background-image: url('media/{{ daily.daily_image }}'); background-size:cover;">
                 <p class="card-text text-white">{{ daily.content }}</p>
             </div>
             <div class="card-footer">
