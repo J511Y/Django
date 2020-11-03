@@ -1,5 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Grandstander:wght@500&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Vampiro+One&display=swap');
 
 h1 a {
-    font-family: 'Grandstander', serif;
+    font-family: 'Vampiro One', cursive;
+}
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body {
+    font-family: 'Noto Sans KR', sans-serif !important;
 }
