@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Vampiro+One&display=swap');
-
-h1 a {
-    font-family: 'Vampiro One', cursive;
-}
-
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url('https://fonts.googleapis.com/css2?family=Vampiro+One&display=swap');
 
 body {
     font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+h1 a {
+    font-family: 'Vampiro One', cursive;
 }

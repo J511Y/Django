@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # 회원 모델
 
@@ -48,5 +49,17 @@ class User(models.Model):
     # 즐겨입는 스타일
     like_style = models.TextField(null=True, blank=True)
 
+    # 유저 타입 (1:일반유저, 99:관리자)
+    user_type = models.IntegerField(default=1)
+
     def __str__(self):
         return self.name + '(' + self.nickname + ')'
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # User모델과 Profile 1:1 연결
+    description = models.TextField(blank=True)
+    nickname = models.CharField(max_length=40, blank=True)
+    profile_image = models.ImageField(blank=True)

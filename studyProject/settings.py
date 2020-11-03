@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pashion.apps.PashionConfig',
-    'user.apps.UserConfig'
+    'user.apps.UserConfig',
+    'daily.apps.DailyConfig',
 ]
 
 MIDDLEWARE = [
