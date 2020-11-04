@@ -8,10 +8,14 @@ from datetime import datetime
 
 
 # 에러 발생
-def ErrorMsg(request, msg):
-    return render(request, 'error.html', {'msg': msg})
+def ErrorMsg(request, msg, url):
+    return render(request, 'error.html', {'msg': msg, 'url': url})
 
 
 # Ajax 요청 시 json 에러 발생
 def ErrorMsgJson(request, msg):
     return JsonResponse({'message': msg}, status=400)
+
+
+# JSON 데이터로 API 요청
+# def JsonAPIRequest()

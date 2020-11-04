@@ -11,7 +11,14 @@ from user.forms import *
 def main(request):
     data = {}
     # 데일리 게시글
-    data["Daily"] = Daily.objects.all()[:6]
+    daily_query = '''
+        SELECT
+            A.*
+            , (SELECT COUNT(*) FROM daily_bookmark B WHERE A.id = B.daily_id) AS bookmark
+        FROM 
+            daily_daily A
+    '''
+    data["Daily"] = Daily.objects.raw(daily_query)[:6]
     data["DailyForm"] = DailyForm()
 
     return render(request, "main.html", data)

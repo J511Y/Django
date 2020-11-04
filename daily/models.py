@@ -6,7 +6,8 @@ from user.models import User
 
 class Daily(models.Model):
     # 게시자 ID
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(
+        User, db_column='user_id', on_delete=models.CASCADE)
 
     # 게시글 이미지
     daily_image = models.ImageField(
@@ -32,3 +33,23 @@ class Daily(models.Model):
 
     def __str__(self):
         return ''
+
+
+class Bookmark(models.Model):
+    # 유저 ID
+    user_id = models.ForeignKey(
+        User, db_column='user_id', on_delete=models.CASCADE)
+
+    # 게시글 번호
+    daily_id = models.ForeignKey(
+        Daily, db_column='daily_id', on_delete=models.CASCADE)
+
+
+class DailyLike(models.Model):
+    # 유저 ID
+    user_id = models.ForeignKey(
+        User, db_column='user_id', on_delete=models.CASCADE)
+
+    # 게시글 번호
+    daily_id = models.ForeignKey(
+        Daily, db_column='daily_id', on_delete=models.CASCADE)
