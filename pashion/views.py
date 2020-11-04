@@ -10,8 +10,10 @@ from user.forms import *
 
 def main(request):
     data = {}
-    data["Daily"] = Daily.objects.all()
+    # 데일리 게시글
+    data["Daily"] = Daily.objects.all()[:6]
     data["DailyForm"] = DailyForm()
+
     return render(request, "main.html", data)
 
 

@@ -6,14 +6,15 @@ from .models import User
 from .forms import *
 from datetime import datetime
 from django.contrib.auth import authenticate
-from studyProject import util
-from studyProject import common
+from studyProject.util import *
+from studyProject.common import *
+from studyProject.decorate import *
 
 # Create your views here.
 
 
 class DailyDetail(View):
-    @util.LoginAuth
+    @LoginAuth
     def post(self, request):
         form = DailyForm(request.POST, request.FILES)
         if form.is_valid():
