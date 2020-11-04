@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-header">
+    <div class="row">
+        <div class="alert alert-danger col-lg-12" role="alert">
+            <h4 class="alert-heading">에러가 발생했습니다!</h4>
+            <p>{{ msg }}</p>
+            {% if url %}
+            <button class="btn btn-primary" onclick="location.href='/{{url}}'">>> 이동하기</button>
+            {% endif %}
+            <hr>
+            <p class="mb-0">문의 연락처 : 010-8817-1849</p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

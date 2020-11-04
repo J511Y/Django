@@ -3,12 +3,12 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import *
 from .models import User
-from .models import Profile
 from .forms import *
 from datetime import datetime
 from django.contrib.auth import authenticate
-from studyProject import util
-from studyProject import common
+from studyProject.util import *
+from studyProject.common import *
+from studyProject.decorate import *
 
 # Create your views here.
 
@@ -58,7 +58,7 @@ class Login(View):
 
 # login required
 class Logout(View):
-    @util.LoginAuth
+    @LoginAuth
     def get(self, request):
         request.session.pop('login_id')
         return redirect("/")
