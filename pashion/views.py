@@ -22,7 +22,3 @@ def main(request):
     data["DailyForm"] = DailyForm()
 
     return render(request, "main.html", data)
-
-
-def profile(request):
-    return render(request, 'profile.html')

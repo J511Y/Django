@@ -3,9 +3,11 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import *
 from .models import User
+from .models import Profile
 from .forms import *
 from datetime import datetime
 from django.contrib.auth import authenticate
+from django.conf import settings
 from studyProject.util import *
 from studyProject.common import *
 from studyProject.decorate import *
@@ -62,3 +64,11 @@ class Logout(View):
     def get(self, request):
         request.session.pop('login_id')
         return redirect("/")
+
+class Profile(View):
+    @LoginAuth
+    def get(self,request):
+        login_id = request.session.get('login_id', None)
+        return render(request, 'user/profile.html',{'id': login_id})
+        
+
