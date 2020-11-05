@@ -27,6 +27,7 @@ class Regist(View):
         if form.is_valid():
             form.save()
             form = UserLoginForm()
+            Profile.objects.create(user=user)
             return render(request, 'user/login.html', {'form': form, 'regist': True})
         else:
             return render(request, 'user/regist.html', {'form': form})
