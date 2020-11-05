@@ -4,8 +4,8 @@
 <html lang="en">
 
 <head>
-    <!-- glyphicon -->
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/5b3cbd68ef.js" crossorigin="anonymous"></script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,7 +34,6 @@
     <title>Django Project!</title>
 </head>
 
-
 <body>
     <!-- Nav bar -->
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
@@ -49,23 +48,29 @@
         <!-- 로그인 된 경우 마이페이지/로그아웃 표시 -->
         {% if request.session.login_id %} 
         <div class="float-right">
-            <a href="#"} style="margin-right: 5px;">
-                {{ request.session.login_id }} 님
+            <a href="#" style="margin-right: 5px;">
+                &nbsp;&nbsp;&nbsp; {{ request.session.login_id }} 님
+            </a>
+            <a href="{% url 'user:logout' %}" style="margin-right: 5px;">
+                <button class="btn btn-sm btn-primary">
+                    <!-- <i class="fas fa-sign-out-alt"></i> -->
+                    로그아웃
+                </button>
             </a>
             <a href="{% url 'daily:upload' %}"  style="margin-right: 5px;">
                 <button class="btn btn-sm btn-primary">
                     <i class="fas fa-plus"></i>
-                    업로드
                 </button>
             </a>
-            <a href="{% url 'user:logout' %}" style="margin-right: 5px;">
+            <a href="#" style="margin-right: 5px;">
                 <button class="btn btn-sm btn-primary">
-                    <i class="fas fa-sign-out-alt"></i>
-                    로그아웃
-                </button>
-                <!-- <span class="glyphicon glyphicon-log-out"></span> -->
+                    <i class="fas fa-heart"></i>
+                </button>    
             </a>
-        </div>
+            <div>
+                <input type="text" placeholder="Search" class="header__search__input u-input-reset" value="" name="s" id="s" />
+                <button type="submit" onclick="alert('검색어를 입력하세요!')"><i class="fa fa-search"></i></button>
+            </div>
         {% else %}
         <div>
             <a href="{% url 'user:login' %}" style="margin-right: 5px;">

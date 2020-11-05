@@ -29,7 +29,6 @@ class DailyDetail(View):
         form = DailyForm(data)
         return render(request, 'daily/upload.html', {'form': form})
 
-
 # ajax 요청
 
 class DailyLikeClick(View):
