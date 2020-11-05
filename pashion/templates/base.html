@@ -53,11 +53,16 @@
                 {{ request.session.login_id }} 님
             </a>
             <a href="{% url 'daily:upload' %}"  style="margin-right: 5px;">
-                <input type="button" class="btn btn-sm btn-primary" value="업로드">
-                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                <button class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i>
+                    업로드
+                </button>
             </a>
             <a href="{% url 'user:logout' %}" style="margin-right: 5px;">
-                <input type="button" class="btn btn-sm btn-primary" value="로그아웃">
+                <button class="btn btn-sm btn-primary">
+                    <i class="fas fa-sign-out-alt"></i>
+                    로그아웃
+                </button>
                 <!-- <span class="glyphicon glyphicon-log-out"></span> -->
             </a>
         </div>
