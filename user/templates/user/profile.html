@@ -1,4 +1,31 @@
 {% extends "base.html" %}
+{% load bootstrap4 %}
 {% block content %}
-<h2>{{ id }}'s Profile</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <h1>
+                {% if user.profile_image %}
+                <img src="{{ user.profile_image.url }}" width=70, alt="{{ user.profile_image}}">
+                {% endif %}
+                {{ user.nickname }}
+            </h1>
+        </div>
+        <div class="col-9">
+            <div>
+                <!-- 닉네임 -->
+                <strong>{{ user.nickname }}</strong>
+            </div>
+            <div>
+                <!-- 자기소개 -->
+                {{ user.description }}
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a href="{% url 'user:profile_update' %}">프로필 수정</a>
+    </div>
+</div>
 {% endblock content %}

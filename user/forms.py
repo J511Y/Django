@@ -23,3 +23,13 @@ class UserLoginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['id', 'password']
+
+# class ProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ('description', 'nickname', 'image',)
+
+# class CustomUserChangeForm(UserChangeForm):
+#     class Meta:
+#         model = User
+#         fields = ('name', 'nickname', 'password', 'newpassword','phone')

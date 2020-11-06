@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'pashion.apps.PashionConfig',
     'user.apps.UserConfig',
     'daily.apps.DailyConfig',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [

@@ -4,9 +4,9 @@
 <div class="container">
     <div id="designer" class="row featurette">
         <div class="col-md-6">
-            <h2 class="featurette-heading">{{ id }}<span id="namedeco" class="text-muted">회원의 포스트</span></h2>
-            <h5 class="featurette-heading">{{ content }}</h5>
-            {% for tag in style_tag %}
+            <h2 class="featurette-heading">{{ daily.id }}<span id="namedeco" class="text-muted">회원의 포스트</span></h2>
+            <h5 class="featurette-heading">{{ daily.content }}</h5>
+            {% for tag in daily.style_tag %}
             <p class="lead"># {{ tag }}</p>
             {% endfor %}
             <div class="d-flex justify-content between align-items-center">
