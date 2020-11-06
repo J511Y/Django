@@ -34,6 +34,7 @@
     var DailyClick = function (btn_type, daily_id) {
         var reqInfo = new Common.RequestInfo();
         reqInfo.AddParameter("daily_id", daily_id);
+        reqInfo.AddParameter("action", btn_type);
 
         Common.Ajax('daily/' + btn_type + "/", reqInfo, function (rtn) {
             if (rtn.substring(0, 13) == "|||SUCCESS|||") $("#daily_" + btn_type + "_" + daily_id).text(rtn.substring(13));
