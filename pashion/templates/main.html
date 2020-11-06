@@ -36,7 +36,7 @@
         reqInfo.AddParameter("daily_id", daily_id);
 
         Common.Ajax('daily/' + btn_type + "/", reqInfo, function (rtn) {
-            if (rtn.substring(0, 13) == "|||SUCCESS|||") $("#daily_" + btn_type + "_" + daily_id).text(rtn);
+            if (rtn.substring(0, 13) == "|||SUCCESS|||") $("#daily_" + btn_type + "_" + daily_id).text(rtn.substring(13));
             else location.href = "user/login";
         }, { 'formMethod': "GET" })
     }
