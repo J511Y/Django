@@ -3,9 +3,11 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import *
 from .models import User
+from .models import Profile
 from .forms import *
 from datetime import datetime
 from django.contrib.auth import authenticate
+from django.conf import settings
 from studyProject.util import *
 from studyProject.common import *
 from studyProject.decorate import *
@@ -84,7 +86,6 @@ class Profile_update(View):
         login_id = request.session.get('login_id', None)        
         user = User.objects.get(id=login_id)
         return render(request, 'user/profile_update.html',{'user' : user})
-        return render(request, 'user/profile.html',{'id': login_id})
 
 class DailyLike(View):
     @LoginAuth
