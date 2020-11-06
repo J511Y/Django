@@ -65,3 +65,9 @@ class UserToDailyLike(View):
     @LoginAuth
     def get(self, request):
         return render(request, 'daily/like.html')
+
+class DailyDetailDelete(View):
+    def post(self, request, id):
+        post = get_object_or_404(id, pk=id)
+        post.delete()
+        return redirect("/")
