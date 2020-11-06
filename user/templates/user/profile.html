@@ -1,4 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>{{ id }}'s Profile</h2>
+
+
+<div class="row">
+    <div class="col-xs-6 col-md-3">
+        {% if user.profile_image %}
+        <h2>{{ user.profile_image }}</h2>
+        {% endif %}
+
+    </div>
+
+    <div class="col-xs-6 col-md-3">
+        {% if user %}
+        <h2>{{user.nickname}}</h2>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            <!-- 파일을 업로드할 때 form method는 POST여야하고 enctype을 multipart/form-data로 설정해야 한다. -->
+
+            <button type="submit" class="btn btn-primary">수정</button>
+    </div>
+</div>
+
 {% endblock content %}

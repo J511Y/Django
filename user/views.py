@@ -68,4 +68,5 @@ class Profile(View):
     @LoginAuth
     def get(self,request):
         login_id = request.session.get('login_id', None)
-        return render(request, 'user/profile.html',{'id': login_id})
+        user = User.objects.get(id=login_id)
+        return render(request, 'user/profile.html',{'user' : user})
