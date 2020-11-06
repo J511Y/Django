@@ -27,6 +27,7 @@ class Regist(View):
         if form.is_valid():
             form.save()
             form = UserLoginForm()
+            Profile.objects.create(user=user)
             return render(request, 'user/login.html', {'form': form, 'regist': True})
         else:
             return render(request, 'user/regist.html', {'form': form})
@@ -68,3 +69,8 @@ class Profile(View):
     def get(self,request):
         login_id = request.session.get('login_id', None)
         return render(request, 'user/profile.html',{'id': login_id})
+
+class DailyLike(View):
+    @LoginAuth
+    def get(request):
+        return render(request, 'daily/like.html')

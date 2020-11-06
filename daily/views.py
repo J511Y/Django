@@ -76,3 +76,14 @@ class DailyBookmarkClick(View):
             )
 
         return HttpResponse(Bookmark.objects.filter(daily_id=data['daily_id']).count())
+
+class Profile(View):
+    @LoginAuth
+    def get(self,request):
+        login_id = request.session.get('login_id', None)
+        return render(request, 'user/profile.html',{'id': login_id})
+
+class DailyLike(View):
+    @LoginAuth
+    def get(self, request):
+        return render(request, 'daily/like.html')

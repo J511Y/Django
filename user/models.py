@@ -3,7 +3,6 @@ from django.conf import settings
 
 # 회원 모델
 
-
 class User(models.Model):
     # ID
     id = models.CharField(primary_key=True, max_length=15)
@@ -54,4 +53,5 @@ class User(models.Model):
 
     def __str__(self):
         return self.name + '(' + self.nickname + ')'
+
 
