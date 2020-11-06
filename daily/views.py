@@ -52,7 +52,8 @@ class DailyLikeClick(View):
                 daily_id=Daily.objects.get(id=data['daily_id']),
             )
 
-        return HttpResponse(DailyLike.objects.filter(daily_id=data['daily_id']).count())
+        count = DailyLike.objects.filter(daily_id=data['daily_id']).count()
+        return HttpResponse("|||SUCCESS|||" + str(count))
 
 
 class DailyBookmarkClick(View):
