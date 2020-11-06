@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ENCRYPT_KEY = b'JTjLgKtGN5E63jU4NT6DYvVnbUUIVjq7M10561JGJIQ='
 
 # Application definition
 
