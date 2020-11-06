@@ -15,6 +15,7 @@ def main(request):
         SELECT
             A.*
             , (SELECT COUNT(*) FROM daily_bookmark B WHERE A.id = B.daily_id) AS bookmark
+            , (SELECT COUNT(*) FROM daily_dailyreply B WHERE A.id = B.daily_id) AS reply
         FROM 
             daily_daily A
     '''

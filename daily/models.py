@@ -53,3 +53,28 @@ class DailyLike(models.Model):
     # 게시글 번호
     daily_id = models.ForeignKey(
         Daily, db_column='daily_id', on_delete=models.CASCADE)
+
+### 데일리 게시글 댓글 모델
+class DailyReply(models.Model):
+    # 유저 ID
+    user_id = models.ForeignKey(
+        User, db_column='user_id', on_delete=models.CASCADE)
+
+    # 게시글 번호
+    daily_id = models.ForeignKey(
+        Daily, db_column='daily_id', on_delete=models.CASCADE)
+
+    # 내용
+    content = models.TextField(null=False, blank=False)
+
+    # 작성일
+    create_day = models.DateTimeField(auto_now_add=True)
+
+    # 수정일
+    update_day = models.DateTimeField(auto_now=True)
+
+    # 원댓글 번호
+    ref = models.IntegerField()
+
+    # 대댓글 번호
+    ref_num = models.IntegerField()
