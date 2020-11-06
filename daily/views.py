@@ -14,6 +14,15 @@ from studyProject.decorate import *
 
 
 class DailyDetail(View):
+    def get(self, request, daily_id):
+        data = request.GET
+        if(Daily.objects.filter(id=daily_id).exists() == False):
+            return ErrorMsg("존재하지 않는 게시글입니다.", "main.html")
+
+        daily = Daily.objects.get(id=daily_id)
+        return render(request, 'daily/post.html', {'daily': daily})
+
+class DailyUpload(View):
     @LoginAuth
     def post(self, request):
         form = DailyForm(request.POST, request.FILES)
@@ -28,7 +37,6 @@ class DailyDetail(View):
 
         form = DailyForm(data)
         return render(request, 'daily/upload.html', {'form': form})
-
 
 # ajax 요청
 
