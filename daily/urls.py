@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:daily_id>/', DailyDetail.as_view(), name="detail"),
     path('upload/', DailyDetail.as_view(), name="upload"),
     path('action/', UserToDailyAction.as_view(), name="action"),
+    path('like/', UserToDailyLike.as_view(), name="like"),
 ]

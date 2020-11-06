@@ -27,3 +27,6 @@ def main(request):
 
 def profile(request):
     return render(request, 'profile.html')
+
+def daily_like(request):
+    return render(request, 'like.html')

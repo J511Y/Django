@@ -76,3 +76,8 @@ class Profile(View):
     def get(self,request):
         login_id = request.session.get('login_id', None)
         return render(request, 'user/profile.html',{'id': login_id})
+
+class DailyLike(View):
+    @LoginAuth
+    def get(request):
+        return render(request, 'daily/like.html')
