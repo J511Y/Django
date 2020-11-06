@@ -19,7 +19,8 @@
                     <i class="fab fa-readme"></i>
                     <text id="daily_read_{{ daily.id }}">{{ daily.read }}</text>
                 </div>
-                <div class="col-lg-4 float-left text-center text-danger" onclick="DailyClick('bookmark', {{ daily.id }});">
+                <div class="col-lg-4 float-left text-center text-danger"
+                    onclick="DailyClick('bookmark', {{ daily.id }});">
                     <i class="fas fa-bookmark"></i>
                     <text id="daily_bookmark_{{ daily.id }}">{{ daily.bookmark }}</text>
                 </div>
@@ -30,18 +31,19 @@
 </div>
 
 <script>
-    var DailyClick = function(btn_type, daily_id){
+    var DailyClick = function (btn_type, daily_id) {
         var reqInfo = new Common.RequestInfo();
         reqInfo.AddParameter("daily_id", daily_id);
 
-        Common.Ajax('daily/' + btn_type + "/", reqInfo, function(rtn){
-            $("#daily_" + btn_type + "_" + daily_id).text(rtn);
-        }, {'formMethod': "GET"})
+        Common.Ajax('daily/' + btn_type + "/", reqInfo, function (rtn) {
+            if (rtn.substring(0, 13) == "|||SUCCESS") $("#daily_" + btn_type + "_" + daily_id).text(rtn);
+            else location.href = "user/login";
+        }, { 'formMethod': "GET" })
     }
 
-    var LoginCheck = function(){
+    var LoginCheck = function () {
         var login_id = '{{ request.session.login_id }}';
-        if(login_id === '') return false;
+        if (login_id === '') return false;
         return true;
     }
 </script>
