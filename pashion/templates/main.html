@@ -11,15 +11,16 @@
                 <p class="card-text text-white">{{ daily.content }}</p>
             </div>
             <div class="card-footer">
-                <div class="col-lg-4 float-left text-center text-primary" onclick="DailyClick('like', {{ daily.id }});">
+                <div class="col-lg-4 float-left text-center text-primary" role="button"
+                    onclick="DailyClick('like', {{ daily.id }});">
                     <i class="far fa-thumbs-up"></i>
                     <text id="daily_like_{{ daily.id }}">{{ daily.like }}</text>
                 </div>
-                <div class="col-lg-4 float-left text-center text-info">
+                <div class="col-lg-4 float-left text-center text-info" role="button">
                     <i class="fab fa-readme"></i>
                     <text id="daily_read_{{ daily.id }}">{{ daily.read }}</text>
                 </div>
-                <div class="col-lg-4 float-left text-center text-danger"
+                <div class="col-lg-4 float-left text-center text-danger" role="button"
                     onclick="DailyClick('bookmark', {{ daily.id }});">
                     <i class="fas fa-bookmark"></i>
                     <text id="daily_bookmark_{{ daily.id }}">{{ daily.bookmark }}</text>
