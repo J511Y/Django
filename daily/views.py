@@ -32,7 +32,7 @@ class DailyDetail(View):
 
 # ajax 요청
 
-class DailyLikeClick(View):
+class UserToDailyAction(View):
     def post(self, request):
         return ErrorMsg("올바르지 않은 접근입니다.", "main")
 
@@ -40,40 +40,23 @@ class DailyLikeClick(View):
     def get(self, request):
         data = request.GET
         login_id = request.session.get('login_id')
-        if DailyLike.objects.filter(user_id=login_id, daily_id=data['daily_id']).exists():
-            DailyLike\
+
+        if(data['action'] == 'like'):
+            Object = DailyLike
+        else:
+            Object = Bookmark
+
+        if Object.objects.filter(user_id=login_id, daily_id=data['daily_id']).exists():
+            Object\
                 .objects\
                 .get(
                     user_id=login_id, daily_id=data['daily_id']
                 ).delete()
         else:
-            DailyLike.objects.create(
+            Object.objects.create(
                 user_id=User.objects.get(id=login_id),
                 daily_id=Daily.objects.get(id=data['daily_id']),
             )
 
         count = DailyLike.objects.filter(daily_id=data['daily_id']).count()
         return HttpResponse("|||SUCCESS|||" + str(count))
-
-
-class DailyBookmarkClick(View):
-    def post(self, request):
-        return ErrorMsg("올바르지 않은 접근입니다.", "main")
-
-    @LoginAuth
-    def get(self, request):
-        data = request.GET
-        login_id = request.session.get('login_id')
-        if Bookmark.objects.filter(user_id=login_id, daily_id=data['daily_id']).exists():
-            Bookmark\
-                .objects\
-                .get(
-                    user_id=login_id, daily_id=data['daily_id']
-                ).delete()
-        else:
-            Bookmark.objects.create(
-                user_id=User.objects.get(id=login_id),
-                daily_id=Daily.objects.get(id=data['daily_id']),
-            )
-
-        return HttpResponse(Bookmark.objects.filter(daily_id=data['daily_id']).count())
