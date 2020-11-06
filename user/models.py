@@ -56,13 +56,4 @@ class User(models.Model):
     def __str__(self):
         return self.name + '(' + self.nickname + ')'
 
-<<<<<<< HEAD
-=======
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # User모델과 Profile을 1:1로 연결 ==> OneToOneField
-    description = models.TextField(blank=True)
-    nickname = models.CharField(max_length=40, blank=True)
-    profile_image = models.ImageField(blank=True)
->>>>>>> c3746f84a0ef2ce485e8eaf5bdef8643aff5a323
 
