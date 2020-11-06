@@ -12,6 +12,7 @@ from studyProject.decorate import *
 
 # Create your views here.
 
+crypt = SimpleEnDecrypt()
 
 class Regist(View):
     def post(self, request):
@@ -25,9 +26,13 @@ class Regist(View):
             return render(request, 'user/regist.html', {'form': form, 'password': 'is-invalid'})
 
         if form.is_valid():
-            form.save()
+            # 저장 전 비밀번호 암호화 작업
+            post = form.save(commit=False)
+            post.password = crypt.encrypt(data['password'])
+            post.password_chk = crypt.encrypt(data['password_chk'])
+            post.save()
+
             form = UserLoginForm()
-            Profile.objects.create(user=user)
             return render(request, 'user/login.html', {'form': form, 'regist': True})
         else:
             return render(request, 'user/regist.html', {'form': form})
@@ -43,8 +48,10 @@ class Login(View):
     def post(self, request):
         data = request.POST
         self.form = UserLoginForm(data)
-
-        if User.objects.filter(id=data['id'], password=data['password']).exists():
+        
+        password = crypt.decrypt(User.objects.filter(id=data['id'])[0].password)
+        
+        if User.objects.filter(id=data['id']).exists() and password == data['password']:
             request.session['login_id'] = data['id']
             return redirect("/")
         else:

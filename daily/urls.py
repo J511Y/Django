@@ -9,6 +9,5 @@ urlpatterns = [
     #path('', views.index, name='index'),
     path('<int:daily_id>/', DailyDetail.as_view(), name="detail"),
     path('upload/', DailyDetail.as_view(), name="upload"),
-    path('like/', DailyLikeClick.as_view(), name="daily_like"),
-    path('bookmark/', DailyBookmarkClick.as_view(), name="daily_bookmark"),
+    path('action/', UserToDailyAction.as_view(), name="action"),
 ]
