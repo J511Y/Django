@@ -77,3 +77,10 @@ class Profile(View):
         login_id = request.session.get('login_id', None)
         user = User.objects.get(id=login_id)
         return render(request, 'user/profile.html',{'user' : user})
+
+class Profile_update(View):
+    @LoginAuth
+    def get(self,request):
+        login_id = request.session.get('login_id', None)        
+        user = User.objects.get(id=login_id)
+        return render(request, 'user/profile_update.html',{'user' : user})

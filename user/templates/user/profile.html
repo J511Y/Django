@@ -1,25 +1,31 @@
 {% extends "base.html" %}
+{% load bootstrap4 %}
 {% block content %}
 
-
-<div class="row">
-    <div class="col-xs-6 col-md-3">
-        {% if user.profile_image %}
-        <h2>{{ user.profile_image }}</h2>
-        {% endif %}
-
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <h1>
+                {% if user.profile_image %}
+                <img src="{{ user.profile_image.url }}" width=70, alt="{{ user.profile_image}}">
+                {% endif %}
+                {{ user.nickname }}
+            </h1>
+        </div>
+        <div class="col-9">
+            <div>
+                <!-- 닉네임 -->
+                <strong>{{ user.nickname }}</strong>
+            </div>
+            <div>
+                <!-- 자기소개 -->
+                {{ user.description }}
+            </div>
+        </div>
     </div>
 
-    <div class="col-xs-6 col-md-3">
-        {% if user %}
-        <h2>{{user.nickname}}</h2>
-        {% endif %}
-
-        <form method="POST" enctype="multipart/form-data">
-            <!-- 파일을 업로드할 때 form method는 POST여야하고 enctype을 multipart/form-data로 설정해야 한다. -->
-
-            <button type="submit" class="btn btn-primary">수정</button>
+    <div>
+        <a href="{% url 'user:profile_update' %}">프로필 수정</a>
     </div>
 </div>
-
 {% endblock content %}
