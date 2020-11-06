@@ -60,3 +60,8 @@ class UserToDailyAction(View):
 
         count = DailyLike.objects.filter(daily_id=data['daily_id']).count()
         return HttpResponse("|||SUCCESS|||" + str(count))
+
+class UserToDailyLike(View):
+    @LoginAuth
+    def get(self, request):
+        return render(request, 'daily/like.html')
