@@ -15,6 +15,7 @@ def main(request):
         SELECT
             A.*
             , (SELECT COUNT(*) FROM daily_bookmark B WHERE A.id = B.daily_id) AS bookmark
+            , (SELECT COUNT(*) FROM daily_dailyreply B WHERE A.id = B.daily_id) AS reply
         FROM 
             daily_daily A
     '''
@@ -26,3 +27,6 @@ def main(request):
 
 def profile(request):
     return render(request, 'profile.html')
+
+def daily_like(request):
+    return render(request, 'like.html')
