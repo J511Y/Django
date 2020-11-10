@@ -7,6 +7,9 @@ from django.shortcuts import *
 from datetime import datetime
 from cryptography.fernet import Fernet
 from studyProject import settings
+from daily.models import Daily
+from user.models import User
+from studyProject.decorate import *
 import base64
 
 # 암호화 클래스
@@ -53,3 +56,5 @@ def ErrorMsgJson(request, msg):
 
 # JSON 데이터로 API 요청
 # def JsonAPIRequest()
+
+

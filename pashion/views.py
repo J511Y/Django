@@ -19,6 +19,7 @@ def main(request):
             , (SELECT COUNT(*) FROM daily_dailyreply B WHERE A.id = B.daily_id) AS reply
         FROM 
             daily_daily A
+        ORDER BY A.create_day DESC
     '''
     data["Daily"] = Daily.objects.raw(daily_query)[:6]
     data["DailyForm"] = DailyForm()
