@@ -9,7 +9,7 @@ def LoginAuth(func):
         login_id = request.session.get('login_id', None)
         if(login_id == None):
             return ErrorMsg(request, "로그인이 필요합니다", "user/login/")
-        return func(func_self, request)
+        return func(func_self, request, *args, **kwargs)
 
     return wrapper
 

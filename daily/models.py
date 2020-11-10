@@ -76,4 +76,4 @@ class DailyReply(models.Model):
     ref = models.IntegerField()
 
     # 대댓글 번호
-    ref_num = models.IntegerField()
+    ref_num = models.IntegerField(default=1)

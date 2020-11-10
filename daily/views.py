@@ -20,7 +20,8 @@ class DailyDetail(View):
             return ErrorMsg("존재하지 않는 게시글입니다.", "main.html")
 
         daily = Daily.objects.get(id=daily_id)
-        return render(request, 'daily/post.html', {'daily': daily})
+        reply = DailyReply.objects.filter(daily_id=daily_id).order_by('-create_day')
+        return render(request, 'daily/post.html', {'daily': daily, 'reply': reply})
 
 class DailyUpload(View):
     @LoginAuth
@@ -73,3 +74,31 @@ class UserToDailyLike(View):
     @LoginAuth
     def get(self, request):
         return render(request, 'daily/like.html')
+
+class DailyDetailDelete(View):
+    def post(self, request, id):
+        post = get_object_or_404(id, pk=id)
+        post.delete()
+        return redirect("/")
+
+class ReplyCreate(View):
+    @LoginAuth
+    def post(self, request, id):
+        data = request.POST
+        if 'ref' in data:
+            ref_num = DailyReply.objects.filter(daily_id=id, ref=data['ref']).count() + 1
+            ref = data['ref']
+        else:
+            ref_num = 1
+            ref = DailyReply.objects.filter(daily_id=id).count() + 1
+
+        reply = DailyReply(
+            daily_id = Daily.objects.get(id=id),
+            content = data['content'],
+            user_id = User.objects.get(id=request.session.get('login_id')),
+            ref = ref,
+            ref_num = ref_num
+        )
+
+        reply.save()
+        return redirect("/daily/" + str(id))
