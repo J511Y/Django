@@ -16,9 +16,6 @@ class Daily(models.Model):
     # 게시글 내용
     content = models.TextField()
 
-    # 좋아요
-    like = models.IntegerField(default=0)
-
     # 읽은 수
     read = models.IntegerField(default=0)
 
@@ -54,7 +51,9 @@ class DailyLike(models.Model):
     daily_id = models.ForeignKey(
         Daily, db_column='daily_id', on_delete=models.CASCADE)
 
-### 데일리 게시글 댓글 모델
+# 데일리 게시글 댓글 모델
+
+
 class DailyReply(models.Model):
     # 유저 ID
     user_id = models.ForeignKey(
@@ -77,4 +76,4 @@ class DailyReply(models.Model):
     ref = models.IntegerField()
 
     # 대댓글 번호
-    ref_num = models.IntegerField()
+    ref_num = models.IntegerField(default=1)

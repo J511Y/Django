@@ -14,6 +14,7 @@ from studyProject.decorate import *
 
 crypt = SimpleEnDecrypt()
 
+
 class Regist(View):
     def post(self, request):
         data = request.POST
@@ -48,9 +49,11 @@ class Login(View):
     def post(self, request):
         data = request.POST
         self.form = UserLoginForm(data)
-        
-        password = crypt.decrypt(User.objects.filter(id=data['id'])[0].password)
-        
+
+        if User.objects.filter(id=data['id']).exists():
+            password = crypt.decrypt(
+                User.objects.filter(id=data['id'])[0].password)
+
         if User.objects.filter(id=data['id']).exists() and password == data['password']:
             request.session['login_id'] = data['id']
             return redirect("/")
@@ -71,19 +74,22 @@ class Logout(View):
         request.session.pop('login_id')
         return redirect("/")
 
+
 class Profile(View):
     @LoginAuth
-    def get(self,request):
+    def get(self, request):
         login_id = request.session.get('login_id', None)
         user = User.objects.get(id=login_id)
-        return render(request, 'user/profile.html',{'user' : user})
+        return render(request, 'user/profile.html', {'user': user})
+
 
 class Profile_update(View):
     @LoginAuth
-    def get(self,request):
-        login_id = request.session.get('login_id', None)        
+    def get(self, request):
+        login_id = request.session.get('login_id', None)
         user = User.objects.get(id=login_id)
-        return render(request, 'user/profile_update.html',{'user' : user})
+        return render(request, 'user/profile_update.html', {'user': user})
+
 
 class DailyLike(View):
     @LoginAuth

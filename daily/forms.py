@@ -19,3 +19,8 @@ class DailyLikeForm(forms.ModelForm):
     class Meta:
         model = DailyLike
         fields = ['daily_id', 'user_id']
+
+class DailyReplyForm(forms.ModelForm):
+    class Meta:
+        model = DailyReply
+        fields = ['daily_id', 'user_id', 'content']

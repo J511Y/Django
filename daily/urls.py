@@ -13,4 +13,5 @@ urlpatterns = [
     path('like/', UserToDailyLike.as_view(), name="like"),
     path('delete/<int:id>/', DailyDetailDelete.as_view(), name="delete"),
     path('daily/<int:id>/', DailyDetail.as_view(), name="daily"),
+    path('reply/<int:id>/', ReplyCreate.as_view(), name="reply"),
 ]
