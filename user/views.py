@@ -75,7 +75,6 @@ class Profile(View):
     @LoginAuth
     def get(self,request):
         login_id = request.session.get('login_id', None)
-<<<<<<< HEAD
         user = User.objects.get(id=login_id)
         return render(request, 'user/profile.html',{'user' : user})
 
@@ -85,11 +84,8 @@ class Profile_update(View):
         login_id = request.session.get('login_id', None)        
         user = User.objects.get(id=login_id)
         return render(request, 'user/profile_update.html',{'user' : user})
-=======
-        return render(request, 'user/profile.html',{'id': login_id})
 
 class DailyLike(View):
     @LoginAuth
     def get(request):
         return render(request, 'daily/like.html')
->>>>>>> 7256363bb66cb4d819546a5db31727f32ebc0bde
