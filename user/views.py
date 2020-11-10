@@ -89,12 +89,8 @@ class Profile_update(View):
     def get(self, request):
         login_id = request.session.get('login_id', None)
         user = User.objects.get(id=login_id)
-<<<<<<< HEAD
-        return render(request, 'user/profile_update.html',{'user' : user})
-=======
         return render(request, 'user/profile_update.html', {'user': user})
 
->>>>>>> c90644c64c00a846cad5226fc6c26fe94018288c
 
 class DailyLike(View):
     @LoginAuth
