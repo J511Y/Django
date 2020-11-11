@@ -1,31 +1,57 @@
 {% extends "base.html" %}
-{% load bootstrap4 %}
+<meta name="viewport" content="width=550, user-scalable=yes">
 {% block content %}
 
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            <h1>
-                {% if user.profile_image %}
-                <img src="{{ user.profile_image.url }}" width=70, alt="{{ user.profile_image}}">
-                {% endif %}
-                {{ user.nickname }}
-            </h1>
-        </div>
-        <div class="col-9">
-            <div>
-                <!-- 닉네임 -->
-                <strong>{{ user.nickname }}</strong>
-            </div>
-            <div>
-                <!-- 자기소개 -->
-                {{ user.description }}
-            </div>
-        </div>
-    </div>
+    <div style="margin-top: 5rem !important;">
+        <div class="col-12">
 
-    <div>
-        <a href="{% url 'user:profile_update' %}">프로필 수정</a>
+            <div class="row justify-content-center">
+                <div class="card">
+                    <div class="card-header" style="padding-bottom:8px;">
+                        <strong style="font-size: 18px;"><i class="fas fa-user-cog"></i>&nbsp;&nbsp;내 정보</strong>
+                    </div>
+                    <div class="card-body">
+                        <table style="color:black; margin-left:10px;">
+                            <tr>
+                                <td class="profile_title">아이디</td>
+                                <td class="profile_content">{{ user.id }}</td>
+
+                            </tr>
+                            <tr>
+                                <td class="profile_title">이메일</td>
+                                <td class="profile_content">{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <td class="profile_title">이름</td>
+                                <td class="profile_content">{{ user.name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="profile_title">닉네임</td>
+                                <td class="profile_content">{{ user.nickname }}</td>
+                            </tr>
+                            <tr>
+                                <td class="profile_title">연락처</td>
+                                <td class="profile_content">{{ user.phone }}</td>
+                            </tr>
+                            <tr>
+                                <td class="profile_title">자기소개</td>
+                                <td class="profile_content">{{ user.description }}</td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        <div style="text-align: center;">
+                            <!-- user.id == login_id 일 때 내정보수정 나타내게 하고 싶음-->
+                            <a href="{% url 'user:profile_update' %}" style="color:#d14040f2; font-size:15px;"><i
+                                    class="fas fa-user-edit"></i>&nbsp;내정보수정</a>&nbsp;&middot;&nbsp;
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock content %}

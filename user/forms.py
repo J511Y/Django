@@ -1,5 +1,7 @@
 from django import forms
+from django.contrib.auth.forms import UserChangeForm
 from .models import User
+
 
 
 class UserRegistForm(forms.ModelForm):
@@ -24,12 +26,20 @@ class UserLoginForm(forms.ModelForm):
         model = User
         fields = ['id', 'password']
 
-# class ProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ('description', 'nickname', 'image',)
-
-# class CustomUserChangeForm(UserChangeForm):
-#     class Meta:
-#         model = User
-#         fields = ('name', 'nickname', 'password', 'newpassword','phone')
+class CustomCsUserChangeForm(UserChangeForm):
+    password = None        
+    phone = forms.IntegerField(label='연락처', widget=forms.NumberInput(
+        attrs={'class': 'form-control', 'maxlength':'11', 'oninput':"maxLengthCheck(this)",}), 
+    )        
+    name = forms.CharField(label='이름', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'maxlength':'8',}), 
+    )        
+    nickname = forms.IntegerField(label='닉네임', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'maxlength':'8',}), 
+    )
+    description = forms.IntegerField(label='자기소개', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'maxlength':'100',}), 
+    )
+    class Meta:
+        model = User
+        fields = ['phone', 'name', 'nickname', 'description']
