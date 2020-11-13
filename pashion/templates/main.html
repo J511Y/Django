@@ -1,6 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="jumbotron bg-light">
+    <h1 class="display-4">
+        <text id="weather_location"></text>
+        <i id="weather_icon" class="wi float-right"></i>
+    </h1>
+    <hr>
+    <h4 class="display-6">
+        <div class="float-left col-lg-6">
+            <text id="weather_temp"></text>
+            <i class="wi wi-celsius"></i>
+            &nbsp;/&nbsp;
+            <text id="weather_feel_temp"></text>
+            <i class="wi wi-celsius"></i>
+        </div>
+        
+        <div class="float-left col-lg-3">
+            <text id="weather_humidity"></text>
+            <i class="wi wi-humidity"></i>
+        </div>
+
+        <div class="float-left col-lg-3">
+            <text id="weather_wind"></text>
+            <i class="wi wi-strong-wind"></i>
+        </div>
+    </h4>
+</div>
+<hr>
+<script>
+    $(document).ready(function(){
+        var reqInfo = new Common.RequestInfo();
+        reqInfo.AddParameter("lat", Navi.lat);
+        reqInfo.AddParameter("lon", Navi.lon);
+
+        Common.Ajax("weather/", reqInfo, function(rtn){
+            console.log(rtn);
+            Weather = Object.assign(Weather, JSON.parse(rtn));
+
+            $("#weather_icon").addClass(Weather.getIconClass());
+            $("#weather_icon").text(Weather.data.weather[0].description);
+            $("#weather_location").text(" " + Weather.data.name);
+
+            $("#weather_temp").text("현재 온도:" + parseInt(Weather.data.main.temp - 273));
+            $("#weather_feel_temp").text("체감 온도:" + parseInt(Weather.data.main.feels_like - 273));
+
+            $("#weather_humidity").text("습도:" + parseInt(Weather.data.main.humidity));
+            
+            $("#weather_wind").text("풍속:" + Weather.data.wind.speed);
+        }, { 'formMethod': "GET" })
+    })
+</script>
 <div class="page-header" id="banner">
     <div class="row">
         {% for daily in Daily %}
