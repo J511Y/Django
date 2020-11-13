@@ -15,15 +15,11 @@
                             <table style="color:black; margin-left:10px;">
                                 <tr>
                                     <td class="profile_title">아이디</td>
-                                    <td class="profile_content">&nbsp;&nbsp;{{ user.id }}</td>
+                                    <td class="profile_content">{{ user.id }}</td>
                                 </tr>
                                 <tr>
                                     <td class="profile_title">이름</td>
                                     <td class="profile_content">{{ user_change_form.name }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="profile_title">이메일</td>
-                                    <td class="profile_content">&nbsp;&nbsp;{{ user.email }}</td>
                                 </tr>
                                 <tr>
                                     <td class="profile_title">연락처</td>
@@ -38,14 +34,6 @@
                                     <td class="profile_content">{{ user_change_form.description }}</td>
                                 </tr>
                             </table>
-
-                            <script type="text/javascript">
-                                form_update(this.form)
-
-                                function form_update(form) {
-                                    document.getElementsByTagName('option')[8].remove();
-                                }
-                            </script>
 
                             <br>
                             <div style="text-align: center; margin-bottom:-15px;">
