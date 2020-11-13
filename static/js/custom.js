@@ -4,8 +4,13 @@ if (!Custom) {
     var Custom = {};
 }
 
-var Navi = {};
-var Weather = {};
+if(!Navi) {
+    var Navi = {};
+}
+
+if (!Weather) {
+    var Weather = {};
+}
 
 Weather.getIconClass = function () {
     var desc = Weather.data.weather[0].description;
