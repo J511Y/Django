@@ -1,4 +1,7 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from studyProject import settings
+from studyProject.common import *
 from daily.models import *
 from daily.forms import *
 
@@ -26,6 +29,19 @@ def main(request):
 
     return render(request, "main.html", data)
 
+
+# 현재 위치 날씨 정보
+def weather(request):
+    data = request.GET
+    print(data)
+    param = {
+        'lat': data.get('lat'),
+        'lon': data.get('lon'),
+        'appid': settings.WEATHER_KEY,
+        'lang': 'kr',
+    }
+    weather_data = JsonAPIRequest('http://api.openweathermap.org/data/2.5/weather', param, 'GET')
+    return JsonResponse({'data': weather_data}, status = 200)
 
 def profile(request):
     return render(request, 'profile.html')
