@@ -19,12 +19,12 @@
 
                             </tr>
                             <tr>
-                                <td class="profile_title">이메일</td>
-                                <td class="profile_content">{{ user.email }}</td>
-                            </tr>
-                            <tr>
                                 <td class="profile_title">이름</td>
                                 <td class="profile_content">{{ user.name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="profile_title">이메일</td>
+                                <td class="profile_content">{{ user.email }}</td>
                             </tr>
                             <tr>
                                 <td class="profile_title">닉네임</td>
@@ -41,13 +41,12 @@
                         </table>
 
                         <hr>
-
+                        {% if user.id == request.session.login_id %}
                         <div style="text-align: center;">
-                            <!-- user.id == login_id 일 때 내정보수정 나타내게 하고 싶음-->
                             <a href="{% url 'user:profile_update' %}" style="color:#d14040f2; font-size:15px;"><i
                                     class="fas fa-user-edit"></i>&nbsp;내정보수정</a>&nbsp;&middot;&nbsp;
                         </div>
-
+                        {% endif %}
                     </div>
                 </div>
             </div>

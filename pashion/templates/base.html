@@ -51,7 +51,7 @@
         <!-- 로그인 된 경우 마이페이지/로그아웃 표시 -->
         {% if request.session.login_id %}
         <div class="float-right">
-            <a href="{% url 'user:profile' %}" style="margin-right: 5px;">
+            <a href="/user/profile/{{request.session.login_id}}" style="margin-right: 5px;">
                 {{ request.session.login_id }} 님
             </a>
             <a href="{% url 'user:logout' %}" style="margin-right: 5px;">
