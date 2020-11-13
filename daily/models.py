@@ -31,7 +31,7 @@ class Daily(models.Model):
     def __str__(self):
         return ''
 
-
+# 북마크 / 좋아요 남긴 게시글 ( 추후 통합 필요 )
 class Bookmark(models.Model):
     # 유저 ID
     user_id = models.ForeignKey(
