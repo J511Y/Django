@@ -76,16 +76,16 @@ class UserToDailyLike(View):
         return render(request, 'daily/like.html')
 
 class DailyDetailDelete(View):
-    def post(self, request, id):
-        post = get_object_or_404(id, pk=id)
-        post.delete()
+    def get(self, request, id):
+        daily = Daily.objects.get(id=id)
+        daily.delete()
         return redirect("/")
 
 class ReplyCreate(View):
     @LoginAuth
     def post(self, request, id):
         data = request.POST
-        if 'ref' in data:
+        if 'ref' in data and data['ref']:
             ref_num = DailyReply.objects.filter(daily_id=id, ref=data['ref']).count() + 1
             ref = data['ref']
         else:
@@ -102,3 +102,9 @@ class ReplyCreate(View):
 
         reply.save()
         return redirect("/daily/" + str(id))
+
+class ReplyDelete(View):
+     def get(self, request, id):
+        reply = DailyReply.objects.get(pk=id)
+        reply.delete()
+        return redirect("/daily/" + str(reply.daily_id.id))

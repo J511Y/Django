@@ -3,8 +3,9 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import *
 from .models import User
+from django.contrib import messages
 from .forms import *
-from .forms import CustomCsUserChangeForm
+from .forms import UserEditForm
 from datetime import datetime
 from django.contrib.auth import authenticate
 from django.conf import settings
@@ -29,10 +30,11 @@ class Regist(View):
             return render(request, 'user/regist.html', {'form': form, 'password': 'is-invalid'})
 
         if form.is_valid():
-            # 저장 전 비밀번호 암호화 작업
+            # 저장 전 비밀번호 및 이메일 암호화 작업
             post = form.save(commit=False)
             post.password = crypt.encrypt(data['password'])
             post.password_chk = crypt.encrypt(data['password_chk'])
+            post.email = crypt.encrypt(data['email'])
             post.save()
 
             form = UserLoginForm()
@@ -78,9 +80,10 @@ class Logout(View):
 
 
 class Profile(View):
-    def get(self, request):
-        login_id = request.session.get('login_id', None)
-        user = User.objects.get(id=login_id)
+    @LoginAuth
+    def get(self, request, id):
+        user = User.objects.get(id=id)
+        user.email = crypt.decrypt(user.email)
         return render(request, 'user/profile.html', {'user': user})
 
 
@@ -89,16 +92,22 @@ class Profile_update(View):
     def post(self, request):
         login_id = request.session.get('login_id', None)
         user = User.objects.get(id=login_id)
-        user_change_form = CustomCsUserChangeForm(request.POST, instance=user)
-        if user_change_form.is_valid():
-            user_change_form.save()
-            messages.success(request, '회원정보가 수정되었습니다.')
-        return render(request, 'user/profile.html')
+        form = UserEditForm(request.POST, instance=user)
+        print("form_isvalid = " + str(form.is_valid()))
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.name = form.cleaned_data['name']
+            post.nickname = form.cleaned_data['nickname']
+            post.phone = form.cleaned_data['phone']
+            post.description = form.cleaned_data['description']
+            post.save()
+            form = UserEditForm()
+        return render(request, 'user/profile.html', {'form': form, 'user': user})
 
     def get(self, request):
         login_id = request.session.get('login_id', None)
         user = User.objects.get(id=login_id)
-        user_change_form = CustomCsUserChangeForm(instance=user)
+        user_change_form = UserEditForm(instance=user)
         return render(request, 'user/profile_update.html', {'user_change_form': user_change_form, 'user': user})
 
 

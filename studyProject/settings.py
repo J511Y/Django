@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 ENCRYPT_KEY = b'JTjLgKtGN5E63jU4NT6DYvVnbUUIVjq7M10561JGJIQ='
 
+WEATHER_KEY = '02ff78eed25a69c800cfed2a5e67bd8a'
+
 # Application definition
 
 INSTALLED_APPS = [

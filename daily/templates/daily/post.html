@@ -1,17 +1,20 @@
 {% extends "base.html" %}
-{% block title %} {{ id }} 회원의 데일리 포스트 {% endblock %}
+<!-- {% block title %} {{ id }} 회원의 데일리 포스트 {% endblock %} -->
 {% block content %}
 <div class="container">
     <div id="designer" class="row featurette">
         <div class="col-md-6">
-            <h2 class="featurette-heading">{{ daily.user_id.id }}<span id="namedeco" class="text-muted">회원의 포스트</span></h2>
-            <h5 class="featurette-heading">{{ daily.content }}</h5>   
-            <p class="lead">{{ tag }}</p>
+            <h2 class="featurette-heading">{{ daily.user_id.id }}<span id="namedeco" class="text-muted">회원의 포스트</span>
+            </h2>
+            <h5 class="featurette-heading">{{ daily.content }}</h5>
+            <p class="lead"># {{ daily.style_tag }}</p>
 
-            {% if request.session.login_id == daily.user_id %}
+            {% if request.session.login_id == daily.user_id.id %}
             <div class="d-flex justify-content between align-items-center">
                 <div class="btn-group">
-                    <a href="{% url 'daily:delete' daily.id %}" class="btn btn-sm btn-outline-danger">정보 삭제</a>
+                    <a href="#" class="btn btn-sm btn-outline-primary"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="{% url 'daily:delete' daily.id %}" class="btn btn-sm btn-outline-danger"><i
+                            class="fas fa-trash-alt"></i></a>
                 </div>
             </div>
             {% endif %}
@@ -24,21 +27,41 @@
 
     <form method="POST" action="{% url 'daily:reply' daily.id %}">
         {% csrf_token %}
+        <input type="hidden" id="ref" name="ref"/>
         <div class="row page-header">
-            <div class="reply-input">
+            {% if request.session.login_id %}
+            <div class="reply-input" id="reply_form">
                 <input type="text" id="content" name="content">
                 <button type="submit">작성</button>
             </div>
-            
-            {% for re in reply%}
+            {% endif %}
+
+            {% for re in reply %}
             <div class="col-lg-12 reply-content mt-2 text-white">
                 <div class="col-lg-2 float-left">{{ re.user_id.nickname }}</div>
-                <div class="col-lg-6 float-left">{{ re.content }}</div>
-                <div class="col-lg-4 float-left">{{ re.create_day }}</div>
+                <div class="col-lg-6 float-left">{{ re.content | linebreaksbr | truncatechars:100 }}</div>
+                <div class="col-lg-4 float-left">{{ re.create_day }}&nbsp;&nbsp;
+                    {% if request.session.login_id %}
+                    <a class="btn btn-sm btn-outline-danger" onclick='Click(this, {{ re.ref }})'><i class="fas fa-reply fa-rotate-180"></i></a>
+                    {% endif %}
+                    {% if request.session.login_id == re.user_id.id or request.session.login_id == daily.user_id.id %}
+                    <a href="{% url 'daily:replydelete' re.id %}" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
+                    {% endif %}
+                </div>
             </div>
             <hr>
             {% endfor %}
+
         </div>
     </form>
 </div>
+<script>
+function Click(obj, ref) {
+    var detach = $("#reply_form").detach();
+    $(obj).parent().parent().after(detach);
+    if(ref != undefined){
+        $("#ref").val(ref);
+    }
+}
+</script>
 {% endblock content %}

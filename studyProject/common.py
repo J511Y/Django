@@ -1,6 +1,7 @@
 # 모든 app에서 공통적으로 사용하는 함수와 클래스를 모아놓은 곳
 # 공통으로 사용되는 부분이므로 작성 및 수정을 조심스레 해야됨
 import json
+import requests
 from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import *
@@ -54,4 +55,10 @@ def ErrorMsgJson(request, msg):
 
 
 # JSON 데이터로 API 요청
-# def JsonAPIRequest()
+def JsonAPIRequest(URL, JSONData, method):
+    if(method.lower() == 'get'):
+        response = requests.get(URL, params=JSONData)
+    else:
+        response = requests.get(URL, data=json.dumps(JSONData))
+
+    return response.json()
