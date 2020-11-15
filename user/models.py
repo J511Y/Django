@@ -5,7 +5,8 @@ from django.conf import settings
 
 class User(models.Model):
     # ID
-    id = models.CharField(primary_key=True, max_length=15)
+    
+    id = models.CharField(primary_key=True, max_length=15,null=False)
 
     # PW
     password = models.CharField(max_length=256, null=True)
