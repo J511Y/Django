@@ -86,20 +86,20 @@ class Profile(View):
 
 class Profile_update(View):
     @LoginAuth
-    def post(self,request):
+    def post(self, request):
         login_id = request.session.get('login_id', None)
         user = User.objects.get(id=login_id)
-        user_change_form = CustomCsUserChangeForm(request.POST, instance = user)
+        user_change_form = CustomCsUserChangeForm(request.POST, instance=user)
         if user_change_form.is_valid():
             user_change_form.save()
             messages.success(request, '회원정보가 수정되었습니다.')
         return render(request, 'user/profile.html')
+
     def get(self, request):
         login_id = request.session.get('login_id', None)
         user = User.objects.get(id=login_id)
-        user_change_form = CustomCsUserChangeForm(instance = user)
-        return render(request, 'user/profile_update.html', {'user_change_form':user_change_form})
-
+        user_change_form = CustomCsUserChangeForm(instance=user)
+        return render(request, 'user/profile_update.html', {'user_change_form': user_change_form, 'user': user})
 
 
 class DailyLike(View):
