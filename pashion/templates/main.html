@@ -55,12 +55,12 @@
     <div class="row">
         {% for daily in Daily %}
         <div class="card bg-light mb-3 col-lg-4 p-0" style="min-height: 18rem;">
-            <div class="card-body"
+            <div class="card-body daily-card"
                 style="background-image: url('media/{{ daily.daily_image }}'); background-size:cover; cursor: pointer;"
                 onclick="location.href='daily/{{ daily.id }}'">
                 <p class="card-text text-white">{{ daily.content }}</p>
             </div>
-            <div class="card-footer">
+            <div class="card-footer daily-card-footer">
                 <div class="col-lg-3 float-left text-center text-primary" role="button"
                     onclick="DailyClick('like', {{ daily.id }});">
                     <i class="far fa-thumbs-up"></i>

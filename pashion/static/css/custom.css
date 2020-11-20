@@ -10,3 +10,11 @@ footer {
     color: white;
     width: 100%;
 }
+
+.daily-card-footer {
+    display: none;
+}
+
+.daily-card:hover+.daily-card-footer {
+    display: block;
+}
