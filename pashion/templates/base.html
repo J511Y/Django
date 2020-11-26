@@ -35,8 +35,8 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a2c1713f870b3a734ceaf135edd8c41b"></script>
 
     <!-- Common, Custom -->
-    <script src="{% static 'js/common.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/common.js' %}/?t={% now 'ymdGHs'%}"></script>
+    <script src="{% static 'js/custom.js' %}/?t={% now 'ymdGHs'%}"></script>
 
     <title>Django Project!</title>
 </head>
