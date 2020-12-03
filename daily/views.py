@@ -24,7 +24,6 @@ class DailyDetail(View):
             daily_id=daily_id).order_by('ref', 'ref_num')
         return render(request, 'daily/post.html', {'daily': daily, 'reply': reply})
 
-
 class DailyUpload(View):
     @LoginAuth
     def post(self, request):
@@ -33,11 +32,10 @@ class DailyUpload(View):
             form.save()
             return redirect('/')
         else:
-            return render(request, 'daily/regist.html', {'form': form})
+            return render(request, 'daily/upload.html', {'form': form})
 
     def get(self, request):
         data = request.GET
-
         form = DailyForm(data)
         return render(request, 'daily/upload.html', {'form': form})
 
@@ -89,9 +87,10 @@ class DailyDetailUpdate(View):
         else:
             return render(request, 'daily/update.html', {'form': form})
 
-    def get(self, request):
+    def get(self, request, id):
+        daily = Daily.objects.get(id=id)
         data = request.GET
-        form = DailyForm(data)
+        form = DailyForm(instance=daily)
         return render(request, 'daily/update.html', {'form': form})
 
 class DailyDetailDelete(View):
@@ -99,7 +98,6 @@ class DailyDetailDelete(View):
         daily = Daily.objects.get(id=id)
         daily.delete()
         return redirect("/")
-
 
 class ReplyCreate(View):
     @LoginAuth
