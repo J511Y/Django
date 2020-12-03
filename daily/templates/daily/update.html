@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="bs-docs-section clearfix">
+    <div class="row mb-3 p-3 bg-light col-lg-4">
+        <form class="post-form" action="{% url 'daily:upload' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{ request.session.login_id }}">
+
+            <div class="form-group">
+                <label for="id_content">게시글내용</label>
+                <input type="text" class="form-control" name="content" id="id_content">
+            </div>
+
+            <div class="form-group">
+                <div>{% if daily.daily_image %}<p>등록된 이미지 : <img src="/media/{{ daily.daily_image }}"
+                            alt="daily_image">{{ daily.daily_image.url }}</a>
+                    </p>{% endif %}</div>
+                <p>새로운 이미지 : <input type="file" name="daily_image" accept="image/*" id="id_daily_image"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="id_style_tag">스타일태그</label>
+                <input type="text" class="form-control" name="style_tag" id="id_style_tag">
+            </div>
+
+            <button type="submit" class="btn btn-outline-info btn-block float-left rounded">게시글 작성</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
